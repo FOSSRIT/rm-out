@@ -1,6 +1,5 @@
-
-import curses
 from block import Block
+import curses
 
 
 def main(stdscr):

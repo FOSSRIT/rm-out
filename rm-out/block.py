@@ -1,4 +1,3 @@
-
 import curses.textpad
 
 class Block:
