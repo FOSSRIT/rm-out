@@ -1,20 +1,23 @@
 import os
 from block import Block
 from ball import Ball
+from paddle import Paddle
 
 class Board:
 
     def __init__(self, window):
 
         self.window = window
-        h, w = window.getmaxyx()
+        self.h, self.w = window.getmaxyx()
 
-        cells_x = w / Block.WIDTH
-        cells_y = h / Block.HEIGHT
+        cells_x = self.w / Block.WIDTH
+        cells_y = self.h / Block.HEIGHT
         self.field = [[None] * cells_x  for i in range(cells_y)]
 
         self._gen_blocks()
-        self.ball = Ball(h-2, w/2)
+        self.ball = Ball(self.h-2, self.w/2)
+
+        self.paddle = Paddle(self.h-1, self.w/2)
 
     def draw(self):
         for row in self.field:
@@ -23,6 +26,10 @@ class Board:
                     cell.draw(self.window)
 
         self.ball.draw(self.window)
+        self.paddle.draw(self.window)
+
+    def move(self, offset):
+        self.paddle.move(offset, self.w)
 
     def animate(self):
         self.ball.animate()

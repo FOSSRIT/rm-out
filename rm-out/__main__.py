@@ -2,6 +2,7 @@ from board import Board
 import curses
 
 FRAME_RATE = 30
+PADDLE_SPEED = 2
 
 
 def main(stdscr):
@@ -16,8 +17,13 @@ def main(stdscr):
 
         if c == ord('q'):
             break;
+        elif c == curses.KEY_LEFT:
+            board.move(-PADDLE_SPEED)
+        elif c == curses.KEY_RIGHT:
+            board.move(PADDLE_SPEED)
         elif c == -1:
-            board.animate() # timeout reached
+            pass
+            #board.animate() # timeout reached
 
         stdscr.clear()
         board.draw()
