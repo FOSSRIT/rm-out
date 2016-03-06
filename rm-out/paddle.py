@@ -1,7 +1,7 @@
 
 class Paddle:
 
-    PADDLE = "==========="
+    PADDLE = "==============="
 
     def __init__(self, y, x):
         self.x = x

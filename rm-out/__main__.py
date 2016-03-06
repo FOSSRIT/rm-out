@@ -18,7 +18,7 @@ def main(stdscr):
     board = Board(stdscr)
     board.draw()
 
-    last_frame_time = millis()
+    a_time = millis()
 
     while True:
         c = stdscr.getch()
@@ -30,8 +30,8 @@ def main(stdscr):
         elif c == curses.KEY_RIGHT:
             board.move(PADDLE_SPEED)
 
-        current_time = millis()
-        if current_time - last_frame_time >= FRAME_RATE:
+        b_time = millis()
+        if b_time - a_time >= FRAME_RATE:
             board.animate()
 
         stdscr.clear()

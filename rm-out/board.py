@@ -33,7 +33,7 @@ class Board:
 
     def animate(self):
         self.ball.animate(self.h, self.w)
-        # self._collide_endzone()
+        self._collide_endzone()
         self._collide_blocks()
         self._collide_paddle()
 
