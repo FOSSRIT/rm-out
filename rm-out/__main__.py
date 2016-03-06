@@ -22,8 +22,7 @@ def main(stdscr):
         elif c == curses.KEY_RIGHT:
             board.move(PADDLE_SPEED)
         elif c == -1:
-            pass
-            #board.animate() # timeout reached
+            board.animate() # timeout reached
 
         stdscr.clear()
         board.draw()

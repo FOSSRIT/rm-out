@@ -32,11 +32,15 @@ class Board:
         self.paddle.move(offset, self.w)
 
     def animate(self):
-        self.ball.animate()
+        self.ball.animate(self.h, self.w)
         self._collide_blocks()
 
     def _collide_blocks(self):
         pass
+
+    def _collide_paddle(self):
+        if self.paddle.contacts(self.ball):
+            self.ball.bounce_y()
 
     def _get_directories(self):
         return [f for f in os.listdir('.') if not os.path.isfile(f)]

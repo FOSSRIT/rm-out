@@ -14,9 +14,15 @@ class Ball:
     def draw(self, window):
         window.addch(self.y, self.x, self.BALLCHAR)
 
-    def animate(self):
+    def animate(self, h, w):
         self.x += self.vx
         self.y += self.vy
+
+        if (self.x <= 0) or (self.x > w - 2):
+            self.bounce_x()
+
+        if (self.y <= 0) or (self.y > h - 2):
+            self.bounce_y()
 
     def bounce_x(self):
         self.vx *= -1

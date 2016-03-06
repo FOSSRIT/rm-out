@@ -19,3 +19,7 @@ class Paddle:
         elif self.x + len(self.PADDLE) >= w:
             self.x = w - len(self.PADDLE) - 1
 
+    def contacts(self, ball):
+        return (ball.x >= self.x) and \
+               (ball.x <= self.x + len(self.PADDLE)) and \
+               (ball.y == self.y - 1)
