@@ -1,3 +1,4 @@
+import os
 import curses.textpad
 
 class Block:
@@ -19,7 +20,7 @@ class Block:
         window.addnstr(self.y + 1, self.x + 1, self.f, self.WIDTH - 2)
 
     def destroy(self):
-        pass #kill the file, destroy the block
+        os.remove(self.f)
 
     def top(self):
         return self.y

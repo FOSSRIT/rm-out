@@ -46,7 +46,7 @@ class Board:
 
         block = self.field[cell_y][cell_x]
         if block is not None:
-            #block.destroy()
+            block.destroy()
             self.field[cell_y][cell_x] = None # destroy the block
 
             # deflect the ball
