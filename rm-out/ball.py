@@ -3,7 +3,7 @@ import curses
 
 class Ball:
 
-    BALLCHAR = "*"
+    BALLCHAR = "O"
 
     def __init__(self, y, x):
         self.x = x
@@ -12,7 +12,7 @@ class Ball:
         self.vy = -1
 
     def draw(self, window):
-        window.addch(self.y, self.x, self.BALLCHAR)
+        window.addch(self.y, self.x, self.BALLCHAR, curses.A_BOLD)
 
     def animate(self, h, w):
         self.x += self.vx
