@@ -7,6 +7,7 @@ class Block:
     HEIGHT = 3
 
     def __init__(self, f, cell_y, cell_x):
+        self.isdir = os.path.isdir(f)
         self.x = cell_x * self.WIDTH
         self.y = cell_y * self.HEIGHT
         self.f = f
@@ -20,7 +21,8 @@ class Block:
         window.addnstr(self.y + 1, self.x + 1, self.f, self.WIDTH - 2)
 
     def destroy(self):
-        os.remove(self.f)
+        if not self.isdir:
+            os.remove(self.f)
 
     def top(self):
         return self.y

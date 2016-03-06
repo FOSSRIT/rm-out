@@ -5,7 +5,7 @@ from paddle import Paddle
 
 class Board:
 
-    def __init__(self, window):
+    def __init__(self, window, path="."):
 
         self.window = window
         self.h, self.w = window.getmaxyx()
@@ -14,7 +14,7 @@ class Board:
         self.cells_y = self.h // Block.HEIGHT
         self.field = [[None] * self.cells_x  for i in range(self.cells_y)]
 
-        self._gen_blocks()
+        self._gen_blocks(path)
         self.ball = Ball(self.h-2, self.w//2)
 
         self.paddle = Paddle(self.h-1, self.w//2)
@@ -46,7 +46,7 @@ class Board:
 
         block = self.field[cell_y][cell_x]
         if block is not None:
-            block.destroy()
+
             self.field[cell_y][cell_x] = None # destroy the block
 
             # deflect the ball
@@ -58,6 +58,11 @@ class Board:
                (self.ball.x == block.right()):
                 self.ball.bounce_x()
 
+            if block.isdir:
+                self._gen_blocks(block.f)
+            else:
+                pass
+                #block.destroy()
 
     def _collide_endzone(self):
         if self.ball.y == self.h - 1:
@@ -67,12 +72,6 @@ class Board:
         if self.paddle.contacts(self.ball):
             self.ball.bounce_y()
 
-    def _get_directories(self):
-        return [f for f in os.listdir('.') if not os.path.isfile(f)]
-
-    def _get_files(self):
-        return [f for f in os.listdir('.') if os.path.isfile(f)]
-
     def _add_block(self, f):
         for y, row in enumerate(self.field):
             for x, cell in enumerate(row):
@@ -81,10 +80,7 @@ class Board:
                     self.field[y][x] = b
                     return
 
-    def _gen_blocks(self):
-        for f in self._get_files():
-            self._add_block(f)
-
-        for f in self._get_directories():
-            self._add_block(f)
+    def _gen_blocks(self, path):
+        for f in os.listdir(path):
+            self._add_block(os.path.join(path, f))
 
