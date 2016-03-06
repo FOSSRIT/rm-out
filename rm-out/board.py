@@ -10,9 +10,9 @@ class Board:
         self.window = window
         self.h, self.w = window.getmaxyx()
 
-        cells_x = self.w / Block.WIDTH
-        cells_y = self.h / Block.HEIGHT
-        self.field = [[None] * cells_x  for i in range(cells_y)]
+        self.cells_x = self.w / Block.WIDTH
+        self.cells_y = self.h / Block.HEIGHT
+        self.field = [[None] * self.cells_x  for i in range(self.cells_y)]
 
         self._gen_blocks()
         self.ball = Ball(self.h-2, self.w/2)
@@ -40,6 +40,9 @@ class Board:
     def _collide_blocks(self):
         cell_x = self.ball.x / Block.WIDTH
         cell_y = self.ball.y / Block.HEIGHT
+
+        if (cell_y >= self.cells_y) or (cell_x >= self.cells_x):
+            return
 
         block = self.field[cell_y][cell_x]
         if block is not None:
