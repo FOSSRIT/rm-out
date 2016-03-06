@@ -1,4 +1,5 @@
 import os
+import curses
 from block import Block
 from ball import Ball
 from paddle import Paddle
@@ -24,6 +25,8 @@ class Board:
             for cell in row:
                 if cell is not None:
                     cell.draw(self.window)
+
+        self.window.attron(curses.color_pair(1))
 
         self.ball.draw(self.window)
         self.paddle.draw(self.window)
