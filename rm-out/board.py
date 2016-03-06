@@ -50,8 +50,14 @@ class Board:
             self.field[cell_y][cell_x] = None # destroy the block
 
             # deflect the ball
-            if self.ball in block:
-                pass
+            if (self.ball.y == block.top()) or \
+               (self.ball.y == block.bottom()):
+                self.ball.bounce_y()
+
+            if (self.ball.x == block.left()) or \
+               (self.ball.x == block.right()):
+                self.ball.bounce_x()
+
 
     def _collide_endzone(self):
         if self.ball.y == self.h - 1:

@@ -18,12 +18,18 @@ class Block:
 
         window.addnstr(self.y + 1, self.x + 1, self.f, self.WIDTH - 2)
 
-    def destroy():
+    def destroy(self):
         pass #kill the file, destroy the block
 
-    def __contains__(self, o):
-        return (o.x >= self.x) and \
-               (o.x <= self.x + self.WIDTH - 1) and \
-               (o.y >= self.y) and \
-               (o.y <= self.y + self.HEIGHT - 1)
+    def top(self):
+        return self.y
+
+    def left(self):
+        return self.x
+
+    def bottom(self):
+        return self.y + self.HEIGHT - 1
+
+    def right(self):
+        return self.x + self.WIDTH - 1
 
