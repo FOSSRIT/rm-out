@@ -4,7 +4,11 @@ from ball import Ball
 
 class Board:
 
-    def __init__(self, h, w):
+    def __init__(self, window):
+
+        self.window = window
+        h, w = window.getmaxyx()
+
         cells_x = w / Block.WIDTH
         cells_y = h / Block.HEIGHT
         self.field = [[None] * cells_x  for i in range(cells_y)]
@@ -12,13 +16,20 @@ class Board:
         self._gen_blocks()
         self.ball = Ball(h-2, w/2)
 
-    def draw(self, window):
+    def draw(self):
         for row in self.field:
             for cell in row:
                 if cell is not None:
-                    cell.draw(window)
+                    cell.draw(self.window)
 
-        self.ball.draw(window)
+        self.ball.draw(self.window)
+
+    def animate(self):
+        self.ball.animate()
+        self._collide_blocks()
+
+    def _collide_blocks(self):
+        pass
 
     def _get_directories(self):
         return [f for f in os.listdir('.') if not os.path.isfile(f)]
