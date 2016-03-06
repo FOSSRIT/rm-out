@@ -21,3 +21,9 @@ class Block:
     def destroy():
         pass #kill the file, destroy the block
 
+    def __contains__(self, o):
+        return (o.x >= self.x) and \
+               (o.x <= self.x + self.WIDTH - 1) and \
+               (o.y >= self.y) and \
+               (o.y <= self.y + self.HEIGHT - 1)
+

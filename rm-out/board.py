@@ -33,10 +33,26 @@ class Board:
 
     def animate(self):
         self.ball.animate(self.h, self.w)
+        # self._collide_endzone()
         self._collide_blocks()
+        self._collide_paddle()
 
     def _collide_blocks(self):
-        pass
+        cell_x = self.ball.x / Block.WIDTH
+        cell_y = self.ball.y / Block.HEIGHT
+
+        block = self.field[cell_y][cell_x]
+        if block is not None:
+            #block.destroy()
+            self.field[cell_y][cell_x] = None # destroy the block
+
+            # deflect the ball
+            if self.ball in block:
+                pass
+
+    def _collide_endzone(self):
+        if self.ball.y == self.h - 1:
+            exit()
 
     def _collide_paddle(self):
         if self.paddle.contacts(self.ball):
