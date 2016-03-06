@@ -10,14 +10,14 @@ class Board:
         self.window = window
         self.h, self.w = window.getmaxyx()
 
-        self.cells_x = self.w / Block.WIDTH
-        self.cells_y = self.h / Block.HEIGHT
+        self.cells_x = self.w // Block.WIDTH
+        self.cells_y = self.h // Block.HEIGHT
         self.field = [[None] * self.cells_x  for i in range(self.cells_y)]
 
         self._gen_blocks()
-        self.ball = Ball(self.h-2, self.w/2)
+        self.ball = Ball(self.h-2, self.w//2)
 
-        self.paddle = Paddle(self.h-1, self.w/2)
+        self.paddle = Paddle(self.h-1, self.w//2)
 
     def draw(self):
         for row in self.field:
@@ -38,8 +38,8 @@ class Board:
         self._collide_paddle()
 
     def _collide_blocks(self):
-        cell_x = self.ball.x / Block.WIDTH
-        cell_y = self.ball.y / Block.HEIGHT
+        cell_x = self.ball.x // Block.WIDTH
+        cell_y = self.ball.y // Block.HEIGHT
 
         if (cell_y >= self.cells_y) or (cell_x >= self.cells_x):
             return

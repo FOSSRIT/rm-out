@@ -3,7 +3,7 @@ import time
 import curses
 
 
-FRAME_RATE = 30
+FRAME_RATE = 40
 PADDLE_SPEED = 2
 
 
