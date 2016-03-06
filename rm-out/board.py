@@ -64,8 +64,7 @@ class Board:
             if block.isdir:
                 self._gen_blocks(block.f)
             else:
-                pass
-                #block.destroy()
+                block.destroy()
 
     def _collide_endzone(self):
         if self.ball.y == self.h - 1:
