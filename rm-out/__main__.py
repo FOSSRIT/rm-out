@@ -1,8 +1,14 @@
 from board import Board
+import time
 import curses
+
 
 FRAME_RATE = 30
 PADDLE_SPEED = 2
+
+
+def millis():
+    return int(round(time.time() * 1000))
 
 
 def main(stdscr):
@@ -11,6 +17,8 @@ def main(stdscr):
 
     board = Board(stdscr)
     board.draw()
+
+    last_frame_time = millis()
 
     while True:
         c = stdscr.getch()
@@ -21,8 +29,10 @@ def main(stdscr):
             board.move(-PADDLE_SPEED)
         elif c == curses.KEY_RIGHT:
             board.move(PADDLE_SPEED)
-        elif c == -1:
-            board.animate() # timeout reached
+
+        current_time = millis()
+        if current_time - last_frame_time >= FRAME_RATE:
+            board.animate()
 
         stdscr.clear()
         board.draw()
